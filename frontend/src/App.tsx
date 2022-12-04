@@ -17,18 +17,20 @@ function App() {
     })
 
   }, [])
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>Blogo</p>
         <div>{(getMessage) != null && (getMessage.status) === 200 ? 
-          <h3>{getMessage.data.message}</h3>
+          <div>       
+            {(getMessage.data.posts != null && getMessage.data.posts.length !== 0) ?
+
+             getMessage.data.posts.map(function(post: any, idx: React.Key | null | undefined){return (<li key={idx}>{post.text}</li>) }) : <h3>No Posts</h3>}
+          </div>
           :
           <h3>LOADING</h3>}</div>
       </header>
-      <button><a href="/no" className="button">Go to Blog Home</a>
-</button> 
     </div>
   );
 }
