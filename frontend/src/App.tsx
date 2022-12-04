@@ -1,39 +1,21 @@
-import React from 'react';
 import './App.css';
-import logo from './logo.svg';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import {PostList} from './PostList'
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
+
 
 function App() {
-  const [getMessage, setGetMessage] =  useState<any>();
-
-  useEffect(()=>{
-    console.log("trying")
-    axios.get('http://127.0.0.1:8000/posts/').then((response: React.SetStateAction<{}>) => {
-      console.log("SUCCESS", response)
-      setGetMessage(response)
-    }).catch((error: any) => {
-      console.log(error)
-    })
-
-  }, [])
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Blogo</p>
-        <div>{(getMessage) != null && (getMessage.status) === 200 ? 
-          <div>       
-            {(getMessage.data.posts != null && getMessage.data.posts.length !== 0) ?
+    <Container maxWidth="sm">
+      <Box sx={{ my: 4 }}>
+        <PostList />
+        <Button variant="contained">Hello World</Button>
 
-             getMessage.data.posts.map(function(post: any, idx: React.Key | null | undefined){return (<li key={idx}>{post.text}</li>) }) : <h3>No Posts</h3>}
-          </div>
-          :
-          <h3>LOADING</h3>}</div>
-      </header>
-    </div>
+      </Box>
+    </Container>
   );
 }
 
 export default App;
-
